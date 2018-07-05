@@ -92,13 +92,6 @@ describe('function calculate() test', () => {
 });
 
 
-describe('function generateReceipt() test', () => {
-
-  it('it is same with the hole software', () => {
-    expect(1).toEqual(1);
-  });
-});
-
 
 
 
