@@ -1,9 +1,5 @@
 'use strict';
 
-describe('pos', () => {
-
-  it('should print text', () => {
-
     const tags = [
       'ITEM000001',
       'ITEM000001',
@@ -14,6 +10,10 @@ describe('pos', () => {
       'ITEM000005',
       'ITEM000005-2',
     ];
+
+describe('pos test', () => {
+
+  it('it should print text', () => {
 
     spyOn(console, 'log');
 
@@ -31,3 +31,49 @@ describe('pos', () => {
     expect(console.log).toHaveBeenCalledWith(expectText);
   });
 });
+
+describe('function findKinds() test', () => {
+
+  it('it should return the right result', () => {
+
+    const buy_items = findKinds(tags);
+    //console.info(buy_items);
+    const temp = Array.from(buy_items)
+    const expectText = '["ITEM000001","ITEM000003","ITEM000005"]';
+    expect(JSON.stringify(temp)).toEqual(expectText);
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
