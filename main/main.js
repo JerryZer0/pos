@@ -111,6 +111,8 @@ function calculate(receiptBase){
 节省：7.50(元)
 **********************
 */
+
+
 function generateReceipt(obj){
 	let itemList = obj.itemList;
 	let str;
