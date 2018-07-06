@@ -10,6 +10,7 @@ function printReceipt(tags){
   console.log(str);
 }
 
+//查找购买商品的种类
 function findKinds(tags){
   let kinds = new Set();
   for(let i=0;i<tags.length;i++){
@@ -22,6 +23,7 @@ function findKinds(tags){
   return buy_items;
 }
 
+//查找购买对应商品的数量
 function findCount(tags,kinds){
   let items = [];
   let count = 0;
@@ -44,6 +46,7 @@ function findCount(tags,kinds){
   return items;
 }
 
+//补充商品的其余信息
 function findTable(items){
   console.info(items);
   let itemList = loadAllItems();
@@ -69,6 +72,7 @@ function findTable(items){
   return buy_items_list;
 }
 
+//查找打折商品，并添加额外的数量标记
 function getPromotion(itemList){
   let num=0;
   let promotionList = loadPromotions();
@@ -85,6 +89,8 @@ function getPromotion(itemList){
   console.info(itemList);
   return itemList;
 }
+
+//计算商品的小计以及总金额、节约的钱
 function calculate(receiptBase){
   let reduce = 0;
   let amount = 0;
@@ -101,27 +107,13 @@ function calculate(receiptBase){
   }
   return obj;
 }
-/*
-***<没钱赚商店>收据***
-名称：雪碧，数量：5瓶，单价：3.00(元)，小计：12.00(元)
-名称：荔枝，数量：2.5斤，单价：15.00(元)，小计：37.50(元)
-名称：方便面，数量：3袋，单价：4.50(元)，小计：9.00(元)
-----------------------
-总计：58.50(元)
-节省：7.50(元)
-**********************
-*/
 
-
+//生成小票并调整金额的格式
 function generateReceipt(obj){
 	let itemList = obj.itemList;
 	let str;
 	str = "";
 	for(let i=0;i<itemList.length;i++){
-//		str += "名称："+ itemList[i].name + "，数量："
-//		+ itemList[i].count + itemList[i].unit +"，单价："
-//		+ itemList[i].price.toFixed(2)+"(元)，小计："
-//		+ itemList[i].subTotal.toFixed(2)+"(元)\n";
       str += `\n名称：${itemList[i].name}，数量：${itemList[i].count}${itemList[i].unit}，单价：${itemList[i].price.toFixed(2)}(元)，小计：${itemList[i].subTotal.toFixed(2)}(元)`
 	}
   let receiptToString = `***<没钱赚商店>收据***${str}
@@ -129,10 +121,6 @@ function generateReceipt(obj){
 总计：${obj.amount.toFixed(2)}(元)
 节省：${obj.reduce.toFixed(2)}(元)
 **********************`
-//	str += "----------------------\n";
-//	str += "总计："+ obj.amount.toFixed(2) + "(元)\n";
-//	str += "节省："+ obj.reduce.toFixed(2) + "(元)\n";
-//	str += "**********************";
 	return receiptToString;
 }
 
