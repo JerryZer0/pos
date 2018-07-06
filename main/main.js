@@ -2,12 +2,12 @@
 
 function printReceipt(tags){
   let kinds = findKinds(tags);
-  let items = findCount(tags,kinds);
-	let itemList = findTable(items);
-	let receiptBase = getPromotion(itemList);
-	let obj = calculate(receiptBase);
-	let str = generateReceipt(obj);
-  console.log(str);
+  let itemsList = findCount(tags,kinds);
+	let itemsListAddInfo = findTable(itemsList);
+	let itemsListAfterPromotion = getPromotion(itemsListAddInfo);
+	let finalObj = calculateSubtotalAndAmount(itemsListAfterPromotion);
+	let receiptToString = generateReceipt(finalObj);
+  console.log(receiptToString);
 }
 
 //查找购买商品的种类
@@ -91,7 +91,7 @@ function getPromotion(itemList){
 }
 
 //计算商品的小计以及总金额、节约的钱
-function calculate(receiptBase){
+function calculateSubtotalAndAmount(receiptBase){
   let reduce = 0;
   let amount = 0;
   for(let i=0;i<receiptBase.length;i++){
