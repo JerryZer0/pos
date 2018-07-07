@@ -1,11 +1,12 @@
 'use strict';
 
 function printReceipt(tags){
-	let items = findCount(tags);
+  let kinds = findKinds(tags);
+  let items = findCount(tags,kinds);
 	let itemList = findTable(items);
 	let receiptBase = getPromotion(itemList);
 	let obj = calculate(receiptBase);
-	let str = print(obj);
+	let str = generateReceipt(obj);
   console.log(str);
 }
 
@@ -17,15 +18,13 @@ function findKinds(tags){
       kinds.add(temp);
   }
   let buy_items = kinds;
+  console.info(buy_items);
   return buy_items;
 }
 
-function findCount(tags){
+function findCount(tags,kinds){
   let items = [];
-  let kinds = [];
-  kinds = findKinds(tags);
   let count = 0;
-  //Iterator iterator = kinds.iterator();
   for(let item of kinds){
     count = 0;
     for(let j=0;j<tags.length;j++){
@@ -41,6 +40,7 @@ function findCount(tags){
       count:count
     })
   }
+  console.log(items);
   return items;
 }
 
@@ -111,47 +111,25 @@ function calculate(receiptBase){
 节省：7.50(元)
 **********************
 */
-function print(obj){
+function generateReceipt(obj){
 	let itemList = obj.itemList;
 	let str;
-	str = "***<没钱赚商店>收据***\n";
+	str = "";
 	for(let i=0;i<itemList.length;i++){
-		str += "名称："+ itemList[i].name + "，数量："+itemList[i].count + itemList[i].unit +"，单价："+itemList[i].price.toFixed(2)+"(元)，小计："+itemList[i].subTotal.toFixed(2)+"(元)\n";
+//		str += "名称："+ itemList[i].name + "，数量："
+//		+ itemList[i].count + itemList[i].unit +"，单价："
+//		+ itemList[i].price.toFixed(2)+"(元)，小计："
+//		+ itemList[i].subTotal.toFixed(2)+"(元)\n";
+      str += `\n名称：${itemList[i].name}，数量：${itemList[i].count}${itemList[i].unit}，单价：${itemList[i].price.toFixed(2)}(元)，小计：${itemList[i].subTotal.toFixed(2)}(元)`
 	}
-	str += "----------------------\n";
-	str += "总计："+ obj.amount.toFixed(2) + "(元)\n";
-	str += "节省："+ obj.reduce.toFixed(2) + "(元)\n";
-	str += "**********************";
-	return str;
+  let receiptToString = `***<没钱赚商店>收据***${str}
+----------------------
+总计：${obj.amount.toFixed(2)}(元)
+节省：${obj.reduce.toFixed(2)}(元)
+**********************`
+//	str += "----------------------\n";
+//	str += "总计："+ obj.amount.toFixed(2) + "(元)\n";
+//	str += "节省："+ obj.reduce.toFixed(2) + "(元)\n";
+//	str += "**********************";
+	return receiptToString;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
