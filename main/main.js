@@ -1,4 +1,5 @@
 'use strict';
+const {loadAllItems,loadPromotions} = require('../main/fixtures');
 
 function printReceipt(tags){
   let kinds = findKinds(tags);
@@ -19,7 +20,6 @@ function findKinds(tags){
       kinds.add(temp);
   }
   let buy_items = kinds;
-  console.info(buy_items);
   return buy_items;
 }
 
@@ -124,33 +124,11 @@ function generateReceipt(obj){
 	return receiptToString;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = {
+  findKinds,
+  findCount,
+  findTable,
+  getPromotion,
+  calculateSubtotalAndAmount,
+  generateReceipt
+}
