@@ -38,36 +38,27 @@ describe('function findKinds() test', () => {
 
 describe('function findCount() test', () => {
 
-    const tags = [
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000001',
-    'ITEM000003-2.5',
-    'ITEM000005',
-    'ITEM000005-2',
-  ];
+  const kinds = ["ITEM000001","ITEM000003","ITEM000005"];
+  const expectText = '[{"barcode":"ITEM000001","count":5},{"barcode":"ITEM000003","count":2.5},{"barcode":"ITEM000005","count":3}]';
+
   it('it should return the right result', () => {
-    // const kinds = findKinds(tags);
-    // const items = findCount(tags,kinds);
-    const kinds = ["ITEM000001","ITEM000003","ITEM000005"];
+    
     const items = findCount(tags,kinds);
-    const expectText = '[{"barcode":"ITEM000001","count":5},{"barcode":"ITEM000003","count":2.5},{"barcode":"ITEM000005","count":3}]';
     expect(JSON.stringify(items)).toEqual(expectText);
   });
 });
 
-// describe('function findTable() test', () => {
+describe('function findTable() test', () => {
 
-//   it('it should return the right result', () => {
-//     const kinds = findKinds(tags);
-//     const items = findCount(tags,kinds);
-//     let itemList = findTable(items);
-//     const expectText = '[{"barcode":"ITEM000001","name":"雪碧","count":5,"unit":"瓶","price":3},{"barcode":"ITEM000003","name":"荔枝","count":2.5,"unit":"斤","price":15},{"barcode":"ITEM000005","name":"方便面","count":3,"unit":"袋","price":4.5}]';
-//     expect(JSON.stringify(itemList)).toEqual(expectText);
-//   });
-// });
+  const items = [{"barcode":"ITEM000001","count":5},{"barcode":"ITEM000003","count":2.5},{"barcode":"ITEM000005","count":3}];
+  const expectText = '[{"barcode":"ITEM000001","name":"雪碧","count":5,"unit":"瓶","price":3},{"barcode":"ITEM000003","name":"荔枝","count":2.5,"unit":"斤","price":15},{"barcode":"ITEM000005","name":"方便面","count":3,"unit":"袋","price":4.5}]';
+
+  it('it should return the right result', () => {
+
+    const itemList = findTable(items);
+    expect(JSON.stringify(itemList)).toEqual(expectText);
+  });
+});
 
 // describe('function getPromotion() test', () => {
 
